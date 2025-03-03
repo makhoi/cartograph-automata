@@ -23,18 +23,25 @@ from MovementFunctions import init_robot, turn_right, move_forward, stop, move_b
 
 # User Configuration Variables
 TIME_STEP = 32
-MODEL_PATH = "C:/Users/rokaw/GitProjects/Codefest2025 - TEMP/CVObjectDetection/Tensorflow/workspace/models/codefest_2025_ssd_mobilenet_v1_fpn"
+
+# Get the current script's directory
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Navigate three directories up
+BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "../../.."))
+MODEL_PATH = os.path.join(BASE_DIR, "CVObjectDetection", "Tensorflow", "workspace", "models", "codefest_2025_ssd_mobilenet_v1_fpn")
+LABEL_MAP_PATH = os.path.join(BASE_DIR, "CVObjectDetection", "Tensorflow", "workspace", "annotations", "label_map.pbtxt")
 CHECKPOINT_NUMBER = 14
-LABEL_MAP_PATH = "C:/Users/rokaw/GitProjects/Codefest2025 - TEMP/CVObjectDetection/Tensorflow/workspace/annotations/label_map.pbtxt"
+
 DETECTION_THRESHOLD = 0.7
 CLASSES_TO_AVOID = ['person', 'shelf']  # Classes to treat as obstacles
 PATH_STEP_SIZE = 10  # Step size for path finding algorithm
 
 # Movement configuration
-LONG_DISTANCE = 22.5  # Updated from 32
-SHORT_DISTANCE = LONG_DISTANCE * 0.72142857142857142857142857142857  # Updated from 23.5
-TURN_ANGLE = 60    # This remains the same
-MOVEMENT_SPEED = 5 # Default speed * 3 as in MovementFunctions
+LONG_DISTANCE = 22.5
+SHORT_DISTANCE = LONG_DISTANCE * (10.4 / 14) # Short Wall / Long Wall = Ratio
+TURN_ANGLE = 60
+MOVEMENT_SPEED = 5
 
 # Enhanced safety configuration
 OBSTACLE_CLEARANCE_THRESHOLD = 100  # Clearance threshold
