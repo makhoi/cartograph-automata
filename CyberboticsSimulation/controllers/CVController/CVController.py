@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Improved Threaded Real-time Object Detection and Rectangle Movement Controller
-- Stops only when obstacles are detected in the middle 30% of the screen
-- Performs turns as a single operation without segmentation
-- Optimized for performance without breaking functionality
+Threaded Real-time Object Detection and Rectangle Movement Controller
+
+Author: Rokawoo
 """
 import sys
 import os
