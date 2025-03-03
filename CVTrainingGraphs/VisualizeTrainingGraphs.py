@@ -5,7 +5,6 @@ This script creates a single window with scrollable, uniformly-sized visualizati
 of TensorFlow training metrics from CSV files in the specified directory.
 
 Author: Rokawoo
-Date: March 2, 2025
 """
 
 import os
