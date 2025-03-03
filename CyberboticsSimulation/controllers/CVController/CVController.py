@@ -11,8 +11,6 @@ import os
 import time
 import threading
 import queue
-# Make sure this is the first thing in your script
-sys.path.insert(0, "C:/Users/rokaw/GitProjects/Codefest2025 - TEMP/CVObjectDetection/Tensorflow/models/research")
 import cv2
 import numpy as np
 import tensorflow as tf
