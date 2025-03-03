@@ -82,7 +82,7 @@ def visualize_training_metrics(csv_dir, smooth_factor=0.8):
             ax.plot(steps, smoothed_values, color=color, linewidth=2, label='Smoothed')
             
             # Add annotations and styling
-            ax.set_title(format_title(metric_name), fontsize=12, x=0.01, y=0.95)
+            ax.set_title(format_title(metric_name), fontsize=12, x=-0.07, y=0.94, ha='left')
             ax.set_xlabel("", labelpad=-1)
             ax.text(1, -0.25, "Training Steps", fontsize=10, transform=ax.transAxes, ha='right')
             ax.set_ylabel("Value")
@@ -163,7 +163,7 @@ def create_combined_plot(ax, all_data, all_min, all_max):
         )
     
     # Style the combined plot
-    ax.set_title("Combined Metrics Overview", fontsize=12)
+    ax.set_title("Combined Metrics Overview", fontsize=12, x=-0.07, y=0.94, ha='left')
     ax.set_xlabel("", labelpad=-1)
     ax.text(1, -0.25, "Training Steps", fontsize=10, transform=ax.transAxes, ha='right')
     ax.set_ylabel("Value")
