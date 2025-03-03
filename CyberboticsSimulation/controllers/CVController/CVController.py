@@ -445,7 +445,7 @@ def visualize_combined(image, obstacles, class_names, line_boxes, clear_paths, c
     # Add movement status
     with movement_state_lock:
         if movement_in_progress:
-            progress_text = f"Moving: {current_action} {current_value} - {int(movement_progress*100)}%"
+            progress_text = f"Moving: {current_action} {current_value:.2f} - {int(movement_progress*100)}%"
         else:
             progress_text = "Movement paused"
     
