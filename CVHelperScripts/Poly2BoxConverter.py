@@ -30,8 +30,9 @@ from shapely.errors import ShapelyDeprecationWarning, GEOSException
 warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning)
 # -------------------- CONFIGURATION --------------------
 # Set your input and output paths here
-INPUT_DIR = r"C:\Users\rokaw\GitProjects\Codefest2025 - TEMP\CVHelperScripts\labeled_cv_training_data"  # Directory containing JSON files
-OUTPUT_DIR = r"C:\Users\rokaw\GitProjects\Codefest2025 - TEMP\CVHelperScripts\labeled_cv_training_data_boxed"   # Directory to save converted JSON files
+script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script's directory
+INPUT_DIR = os.path.join(script_dir, "labeled_cv_training_data")
+OUTPUT_DIR = os.path.join(script_dir, "labeled_cv_training_data_boxed")
 VISUALIZE = True                 # Set to True to visualize conversions
 IOU_THRESHOLD = 0.7              # Minimum IoU threshold (0.0 to 1.0)
 # -------------------------------------------------------
