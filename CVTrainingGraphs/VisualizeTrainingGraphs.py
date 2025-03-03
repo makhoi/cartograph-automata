@@ -36,8 +36,8 @@ def visualize_training_metrics(csv_dir, smooth_factor=0.8):
     num_rows = num_metrics + 1
     
     # Create a tall figure with fixed-width subplots
-    # Height is calculated based on number of plots (5 inches per plot)
-    fig = plt.figure(figsize=(12, 5 * num_rows), constrained_layout=True)
+    # Height is calculated based on number of plots (x inches per plot)
+    fig = plt.figure(figsize=(12, 7 * num_rows), constrained_layout=True)
     
     # Create grid layout
     gs = GridSpec(num_rows, 1, figure=fig)
@@ -82,8 +82,9 @@ def visualize_training_metrics(csv_dir, smooth_factor=0.8):
             ax.plot(steps, smoothed_values, color=color, linewidth=2, label='Smoothed')
             
             # Add annotations and styling
-            ax.set_title(format_title(metric_name))
-            ax.set_xlabel("Training Steps")
+            ax.set_title(format_title(metric_name), fontsize=12, x=0.01, y=0.95)
+            ax.set_xlabel("", labelpad=-1)
+            ax.text(1, -0.25, "Training Steps", fontsize=10, transform=ax.transAxes, ha='right')
             ax.set_ylabel("Value")
             ax.grid(True, alpha=0.3)
             ax.legend(loc='upper right')
@@ -108,24 +109,26 @@ def visualize_training_metrics(csv_dir, smooth_factor=0.8):
     create_combined_plot(ax_combined, all_data, all_min, all_max)
     
     # Add overall title to the figure
-    fig.suptitle("TensorFlow Training Metrics Visualization", fontsize=16, y=0.995)
+    fig.suptitle("TensorFlow Training Metrics Visualization", fontsize=16, x=0.1, y=1)
     
-    # Try to set window size in a cross-platform way
+    # Try to set window to fullscreen in a cross-platform way
     try:
         figManager = plt.get_current_fig_manager()
-        # Different backends have different methods to set window size
+        
+        # Different backends have different methods for fullscreen
         if hasattr(figManager, 'window'):
-            if hasattr(figManager.window, 'setGeometry'):  # Qt backend
-                figManager.window.setGeometry(100, 100, 1000, 800)
-            elif hasattr(figManager.window, 'wm_geometry'):  # Tk backend
-                figManager.window.wm_geometry("1000x800")
-        elif hasattr(figManager, 'resize'):  # Some other backends
-            figManager.resize(1000, 800)
-        elif hasattr(figManager, 'set_window_title'):  # At least set a nice title
-            figManager.set_window_title('TensorFlow Training Metrics')
+            if hasattr(figManager.window, 'showMaximized'):  # Qt backend
+                figManager.window.showMaximized()
+            elif hasattr(figManager.window, 'state'):  # Tk backend
+                figManager.window.state('zoomed')  # Windows
+                # figManager.window.attributes('-zoomed', True)  # Linux
+        elif hasattr(figManager, 'full_screen_toggle'):  # Newer matplotlib versions
+            figManager.full_screen_toggle()
+        elif hasattr(figManager, 'frame'):  # wxPython
+            figManager.frame.Maximize(True)
+        
     except Exception as e:
-        # Just continue if we can't set the window size
-        print(f"Note: Could not set window size. This doesn't affect functionality.")
+        print(f"Note: Could not set fullscreen mode. This doesn't affect functionality.")
     
     # Show the complete figure
     plt.tight_layout(rect=[0, 0, 1, 0.98])  # Adjust for suptitle
@@ -160,8 +163,9 @@ def create_combined_plot(ax, all_data, all_min, all_max):
         )
     
     # Style the combined plot
-    ax.set_title("Combined Metrics Overview")
-    ax.set_xlabel("Training Steps")
+    ax.set_title("Combined Metrics Overview", fontsize=12)
+    ax.set_xlabel("", labelpad=-1)
+    ax.text(1, -0.25, "Training Steps", fontsize=10, transform=ax.transAxes, ha='right')
     ax.set_ylabel("Value")
     ax.grid(True, alpha=0.3)
     
@@ -197,7 +201,7 @@ def add_stats_annotation(ax, values, steps):
     
     ax.annotate(
         stats_text,
-        xy=(0.02, 0.97),
+        xy=(1.06, 0.91),
         xycoords='axes fraction',
         bbox=dict(boxstyle="round,pad=0.5", fc="white", alpha=0.8),
         va='top'
