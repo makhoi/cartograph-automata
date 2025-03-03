@@ -1,3 +1,20 @@
+#!/usr/bin/env python3
+"""
+Polygon to Bounding Box Converter
+---------------------------------
+This script converts polygon annotations in LabelMe JSON files to bounding box annotations.
+It calculates optimal bounding boxes that maximize IoU with the original polygons.
+
+Features:
+- Converts polygon annotations to rectangle annotations (bounding boxes)
+- Optimizes boxes to maximize IoU with original polygons
+- Provides visualization of conversions with low IoU scores
+- Generates a detailed conversion report
+- Handles invalid polygons with graceful fallbacks
+
+Author: Rokawoo
+"""
+
 import os
 import json
 import numpy as np
