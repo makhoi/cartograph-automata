@@ -22,17 +22,23 @@ from object_detection.utils import config_util
 from MovementFunctions import init_robot, turn_right, move_forward, stop, move_backward
 
 # User Configuration Variables
+
+# Webots configuration
 TIME_STEP = 32
 
-# Get the current script's directory
+# Model Dir & Checkpoint
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Navigate three directories up
 BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "../../.."))
 MODEL_PATH = os.path.join(BASE_DIR, "CVObjectDetection", "Tensorflow", "workspace", "models", "codefest_2025_ssd_mobilenet_v1_fpn")
 LABEL_MAP_PATH = os.path.join(BASE_DIR, "CVObjectDetection", "Tensorflow", "workspace", "annotations", "label_map.pbtxt")
 CHECKPOINT_NUMBER = 14
 
+if not os.path.exists(MODEL_PATH):
+    raise FileNotFoundError(f"Error: Model directory not found at '{MODEL_PATH}'")
+if not os.path.exists(os.path.dirname(LABEL_MAP_PATH)):
+    raise FileNotFoundError(f"Error: Label map directory not found at '{os.path.dirname(LABEL_MAP_PATH)}'")
+
+# Object Detection Configuration
 DETECTION_THRESHOLD = 0.7
 CLASSES_TO_AVOID = ['person', 'shelf']  # Classes to treat as obstacles
 PATH_STEP_SIZE = 10  # Step size for path finding algorithm
