@@ -1,0 +1,12 @@
+item { 
+	name:'person'
+	id:1
+}
+item { 
+	name:'line'
+	id:2
+}
+item { 
+	name:'shelf'
+	id:3
+}
