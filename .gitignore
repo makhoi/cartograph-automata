@@ -76,7 +76,6 @@ logs/
 .DS_Store
 
 # Data files
-*.csv
 *.dat
 *.out
 *.pkl
