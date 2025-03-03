@@ -29,7 +29,7 @@ TIME_STEP = 32
 # Model Dir & Checkpoint
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "../../.."))
-MODEL_PATH = os.path.join(BASE_DIR, "   ", "Tensorflow", "workspace", "models", "codefest_2025_ssd_mobilenet_v1_fpn")
+MODEL_PATH = os.path.join(BASE_DIR, "CVObjectDetection", "Tensorflow", "workspace", "models", "codefest_2025_ssd_mobilenet_v1_fpn")
 LABEL_MAP_PATH = os.path.join(BASE_DIR, "CVObjectDetection", "Tensorflow", "workspace", "annotations", "label_map.pbtxt")
 CHECKPOINT_NUMBER = 14
 
