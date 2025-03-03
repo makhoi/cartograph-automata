@@ -33,7 +33,7 @@ CLASSES_TO_AVOID = ['person', 'shelf']  # Classes to treat as obstacles
 PATH_STEP_SIZE = 10  # Step size for path finding algorithm
 
 # Movement configuration
-LONG_DISTANCE = 22.7  # Updated from 32
+LONG_DISTANCE = 22.5  # Updated from 32
 SHORT_DISTANCE = LONG_DISTANCE * 0.72142857142857142857142857142857  # Updated from 23.5
 TURN_ANGLE = 60    # This remains the same
 MOVEMENT_SPEED = 5 # Default speed * 3 as in MovementFunctions
@@ -196,8 +196,8 @@ def is_obstacle_in_middle(obstacles, width):
     if not obstacles:
         return False
         
-    left_bound = int(width * 0.45)
-    right_bound = int(width * 0.55)
+    left_bound = int(width * 0.40)
+    right_bound = int(width * 0.60)
     
     for bbox in obstacles:
         x_min, _ = bbox.min(axis=0)
@@ -402,8 +402,8 @@ def visualize_combined(image, obstacles, class_names, line_boxes, clear_paths, c
     height, width = image.shape[:2]
     
     # Draw middle region indicator (30% of screen width)
-    left_bound = int(width * 0.45)
-    right_bound = int(width * 0.55)
+    left_bound = int(width * 0.40)
+    right_bound = int(width * 0.60)
     
     # Draw semi-transparent vertical lines to show detection zone
     overlay = vis_img.copy()
