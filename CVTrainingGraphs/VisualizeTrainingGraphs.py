@@ -1,8 +1,8 @@
 """
 TensorFlow Training Metrics Visualizer
 --------------------------------------
-This script creates comprehensive visualizations of TensorFlow training metrics
-from CSV files in the specified directory and displays them in interactive windows.
+This script creates a single window with scrollable, uniformly-sized visualizations
+of TensorFlow training metrics from CSV files in the specified directory.
 
 Author: Rokawoo
 Date: March 2, 2025
@@ -12,12 +12,13 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.gridspec import GridSpec
 from pathlib import Path
 
 
 def visualize_training_metrics(csv_dir, smooth_factor=0.8):
     """
-    Creates interactive visualizations for TensorFlow training metrics from CSV files.
+    Creates a single window with all training metrics visualizations.
     
     Args:
         csv_dir (str): Directory containing CSV files
@@ -30,18 +31,25 @@ def visualize_training_metrics(csv_dir, smooth_factor=0.8):
         print(f"No CSV files found in {csv_dir}")
         return
     
-    # Create figure for combined plot
-    plt.figure(figsize=(12, 8))
+    # Calculate layout dimensions - one additional row for the combined view
+    num_metrics = len(csv_files)
+    num_rows = num_metrics + 1
+    
+    # Create a tall figure with fixed-width subplots
+    # Height is calculated based on number of plots (5 inches per plot)
+    fig = plt.figure(figsize=(12, 5 * num_rows), constrained_layout=True)
+    
+    # Create grid layout
+    gs = GridSpec(num_rows, 1, figure=fig)
     
     # Color palette for consistent colors
     colors = plt.cm.tab10.colors
     
-    # Track min/max values for y-axis scaling
+    # Store all data for combined plot
+    all_data = []
     all_min, all_max = float('inf'), float('-inf')
     
-    # Process each CSV file
-    metrics_data = []
-    
+    # Process each CSV file for individual plots
     for idx, csv_path in enumerate(csv_files):
         try:
             # Extract metric name from filename
@@ -61,17 +69,30 @@ def visualize_training_metrics(csv_dir, smooth_factor=0.8):
             # Apply exponential moving average for smoothing
             smoothed_values = apply_smoothing(values, smooth_factor)
             
-            # Update min/max for y-axis scaling
+            # Update min/max for scaling
             all_min = min(all_min, np.min(values))
             all_max = max(all_max, np.max(values))
             
-            # Add to combined plot
-            color = colors[idx % len(colors)]
-            plt.plot(steps, values, color=color, alpha=0.3, linewidth=1)
-            plt.plot(steps, smoothed_values, color=color, linewidth=2, label=metric_name)
+            # Create individual subplot
+            ax = fig.add_subplot(gs[idx + 1, 0])  # +1 because first row is for combined plot
             
-            # Store data for individual plots
-            metrics_data.append({
+            # Plot individual metric
+            color = colors[idx % len(colors)]
+            ax.plot(steps, values, color=color, alpha=0.3, linewidth=1, label='Raw')
+            ax.plot(steps, smoothed_values, color=color, linewidth=2, label='Smoothed')
+            
+            # Add annotations and styling
+            ax.set_title(format_title(metric_name))
+            ax.set_xlabel("Training Steps")
+            ax.set_ylabel("Value")
+            ax.grid(True, alpha=0.3)
+            ax.legend(loc='upper right')
+            
+            # Add statistical information
+            add_stats_annotation(ax, values, steps)
+            
+            # Store data for combined plot
+            all_data.append({
                 'steps': steps,
                 'values': values,
                 'smoothed_values': smoothed_values,
@@ -82,20 +103,33 @@ def visualize_training_metrics(csv_dir, smooth_factor=0.8):
         except Exception as e:
             print(f"Error processing {csv_path}: {str(e)}")
     
-    # Finalize combined plot
-    finalize_combined_plot(all_min, all_max)
+    # Create combined plot at the top
+    ax_combined = fig.add_subplot(gs[0, 0])
+    create_combined_plot(ax_combined, all_data, all_min, all_max)
     
-    # Create individual plots for each metric
-    for metric in metrics_data:
-        create_individual_plot(
-            metric['steps'], 
-            metric['values'], 
-            metric['smoothed_values'], 
-            metric['metric_name'], 
-            metric['color']
-        )
+    # Add overall title to the figure
+    fig.suptitle("TensorFlow Training Metrics Visualization", fontsize=16, y=0.995)
     
-    # Show all plots
+    # Try to set window size in a cross-platform way
+    try:
+        figManager = plt.get_current_fig_manager()
+        # Different backends have different methods to set window size
+        if hasattr(figManager, 'window'):
+            if hasattr(figManager.window, 'setGeometry'):  # Qt backend
+                figManager.window.setGeometry(100, 100, 1000, 800)
+            elif hasattr(figManager.window, 'wm_geometry'):  # Tk backend
+                figManager.window.wm_geometry("1000x800")
+        elif hasattr(figManager, 'resize'):  # Some other backends
+            figManager.resize(1000, 800)
+        elif hasattr(figManager, 'set_window_title'):  # At least set a nice title
+            figManager.set_window_title('TensorFlow Training Metrics')
+    except Exception as e:
+        # Just continue if we can't set the window size
+        print(f"Note: Could not set window size. This doesn't affect functionality.")
+    
+    # Show the complete figure
+    plt.tight_layout(rect=[0, 0, 1, 0.98])  # Adjust for suptitle
+    plt.subplots_adjust(hspace=0.4)  # Add more space between subplots
     plt.show()
 
 
@@ -107,42 +141,39 @@ def apply_smoothing(values, smooth_factor):
     return smoothed
 
 
-def create_individual_plot(steps, values, smoothed_values, metric_name, color):
-    """Create individual plot for a single metric in a new figure"""
-    plt.figure(figsize=(10, 6))
-    plt.plot(steps, values, color=color, alpha=0.3, linewidth=1, label='Raw')
-    plt.plot(steps, smoothed_values, color=color, linewidth=2, label='Smoothed')
+def create_combined_plot(ax, all_data, all_min, all_max):
+    """Create the combined overview plot on the provided axis"""
+    for data in all_data:
+        ax.plot(
+            data['steps'], 
+            data['values'], 
+            color=data['color'], 
+            alpha=0.2, 
+            linewidth=1
+        )
+        ax.plot(
+            data['steps'], 
+            data['smoothed_values'], 
+            color=data['color'], 
+            linewidth=2, 
+            label=data['metric_name']
+        )
     
-    plt.title(f"{format_title(metric_name)}")
-    plt.xlabel("Training Steps")
-    plt.ylabel("Value")
-    plt.grid(True, alpha=0.3)
-    plt.legend()
-    
-    # Add statistical information
-    add_stats_annotation(values, steps)
-    
-    plt.tight_layout()
-
-
-def finalize_combined_plot(all_min, all_max):
-    """Finalize the combined plot with all metrics"""
-    plt.title("Training Metrics Overview")
-    plt.xlabel("Training Steps")
-    plt.ylabel("Value")
-    plt.grid(True, alpha=0.3)
+    # Style the combined plot
+    ax.set_title("Combined Metrics Overview")
+    ax.set_xlabel("Training Steps")
+    ax.set_ylabel("Value")
+    ax.grid(True, alpha=0.3)
     
     # Add padding to y-axis limits for better visualization
     y_range = all_max - all_min
-    plt.ylim(all_min - 0.1 * y_range, all_max + 0.1 * y_range)
+    ax.set_ylim(all_min - 0.1 * y_range, all_max + 0.1 * y_range)
     
     # Place legend outside plot for better visibility with many metrics
-    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-    
-    plt.tight_layout()
+    ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 
 
-def add_stats_annotation(values, steps):
+def add_stats_annotation(ax, values, steps):
     """Add statistical information to the plot"""
     # Calculate statistics
     final_value = values[-1]
@@ -164,7 +195,7 @@ def add_stats_annotation(values, steps):
         f"Change: {improvement:.1f}%"
     )
     
-    plt.annotate(
+    ax.annotate(
         stats_text,
         xy=(0.02, 0.97),
         xycoords='axes fraction',
@@ -183,7 +214,7 @@ if __name__ == "__main__":
     CSV_DIRECTORY = "RawCsvData"  # Directory containing CSV files
     SMOOTHING_FACTOR = 0.8  # Smoothing factor for EMA (0-1)
     
-    # Run visualization with interactive display
+    # Run visualization
     visualize_training_metrics(CSV_DIRECTORY, SMOOTHING_FACTOR)
     
-    print("Interactive visualization complete. Close the windows to exit.")
+    print("Visualization complete. Close the window to exit.")
