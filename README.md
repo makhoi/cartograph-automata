@@ -12,9 +12,9 @@
 
 ## Abstract
 
-Cartograph Automata is a computer vision-based navigation system for mobile robots in a simulated environment. It combines object detection with simple path-planning logic to help robots avoid obstacles and move safely in real time.
+Cartograph Automata is a computer vision-based navigation system for mobile robots in a simulated environment - here we simulated warehouse environments. It combines object detection with simple path-planning logic to help robots avoid obstacles and move safely in real time.
 
-We used up to 700 labeled images to train an SSD ResNet50 model that detects people, shelves, and paths. The training process was tracked using loss graphs, showing strong performance over 14,000 steps.
+We used up to 700 labeled images to train an SSD ResNet50 model that detects 3 main targeted objects: people, shelves, and paths. The training process was tracked using loss graphs, showing strong performance over 14,000 steps.
 
 The system uses segmentation and bounding-box mapping to create a simple obstacle map from image data. If the robot's path crosses an obstacle, it calculates a safe detour, follows it, and then returns to the original path once the way is clear.
 
