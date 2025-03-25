@@ -2,7 +2,7 @@
   <img src="ReadmeImages/S1.png" alt="Demo Image 1" align="center" width="400px"/>
   <img src="ReadmeImages/S2.png" alt="Demo Image 2" align="center" width="400px"/>
   <h1>Cartograph Automata</h1>
-  <p>By Rokawoo, Khoi, Arya, Mehroj</p>
+  <p>By Khoi, Rokawoo, Arya, Mehroj</p>
 </div>
 
 
