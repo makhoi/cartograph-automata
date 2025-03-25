@@ -18,7 +18,7 @@ We used up to 700 labeled images to train an SSD ResNet50 model that detects peo
 
 The system uses segmentation and bounding-box mapping to create a simple obstacle map from image data. If the robot's path crosses an obstacle, it calculates a safe detour, follows it, and then returns to the original path once the way is clear.
 
-<b> Applications </b>: In warehouses and factories, it can help mobile robots avoid workers or obstacles. In healthcare, delivery robots can use vision-based rerouting to safely navigate crowded hospital hallways. In retail, it enables shopping assistants or cleaning bots to move smoothly around people and displays in real time. The system also serves as a valuable learning tool in robotics education, offering hands-on experience with computer vision, object detection, and planning in a simulated environment. Beyond that, it provides a lightweight testbed for evaluating AI model performance in real-time navigation scenarios, making it useful for both research and practical deployment.
+<b>Applications:</b> In warehouses and factories, it can help mobile robots avoid workers or obstacles. In healthcare, delivery robots can use vision-based rerouting to safely navigate crowded hospital hallways. In retail, it enables shopping assistants or cleaning bots to move smoothly around people and displays in real time. The system also serves as a valuable learning tool in robotics education, offering hands-on experience with computer vision, object detection, and planning in a simulated environment. Beyond that, it provides a lightweight testbed for evaluating AI model performance in real-time navigation scenarios, making it useful for both research and practical deployment.
 
 ## Demo
 
