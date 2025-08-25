@@ -15,17 +15,17 @@ Inspired by how [Amazon’s warehouse robots stick to the path and dodge shelves
 ## Data Flow
 
 ```text
-[Webots Camera + Distance Sensors]
-               │
-        [Preprocess]
-           ├───────────────┐
-           │               │
-[OpenCV Free-Space Seg]  [TF SSD ResNet50 Detector]
-           │               │
-   Free-space mask     Obstacles (+classes)
-           └───────┬───────┘
+        [Webots Camera + Distance Sensors]
+                       │
+                  [Preprocess]
+               ├───────────────┐
+               │               │
+    [OpenCV Free-Space Seg]  [TF SSD ResNet50 Detector]
+               │               │
+       Free-space mask     Obstacles (+classes)
+               └───────┬───────┘
                [Fusion / Costmap]
-                      │
+                       │
 [Intelligent Path Deviation] → [Return-to-Path Algorithm]
 ````
 
