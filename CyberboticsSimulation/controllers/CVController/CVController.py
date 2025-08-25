@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Threaded Real-time Object Detection and Rectangle Movement Controller
-
-Author: Rokawoo
 """
 import sys
 import os

@@ -5,7 +5,6 @@ This script efficiently copies images with corresponding JSON labels from multip
 to a single destination directory for computer vision training. It validates image formats,
 avoids duplicates, and can generate detailed summaries of the training data.
 
-Author: Rokawoo
 """
 import os
 import sys

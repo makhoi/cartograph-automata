@@ -11,8 +11,6 @@ Features:
 - Provides visualization of conversions with low IoU scores
 - Generates a detailed conversion report
 - Handles invalid polygons with graceful fallbacks
-
-Author: Rokawoo
 """
 
 import os

@@ -3,8 +3,6 @@ TensorFlow Training Metrics Visualizer
 --------------------------------------
 This script creates a single window with scrollable, uniformly-sized visualizations
 of TensorFlow training metrics from CSV files in the specified directory.
-
-Author: Rokawoo
 """
 
 import os

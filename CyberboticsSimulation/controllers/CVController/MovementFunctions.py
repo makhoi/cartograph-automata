@@ -4,8 +4,6 @@
 Simplified Robot Movement Library
 A collection of easy-to-use movement functions for the four-wheeled robot in Webots.
 Includes angle normalization to correct turning discrepancies.
-
-Author: Rokawoo
 """
 
 import math

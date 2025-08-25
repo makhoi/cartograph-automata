@@ -3,8 +3,6 @@
 Dependency Test Script for TensorFlow Model
 This script tests if all required dependencies are properly installed
 without actually loading or running the model.
-
-Author: Rokawoo
 """
 
 import sys

@@ -4,8 +4,6 @@ LabelMe JSON Validator
 ---------------------
 This script validates LabelMe JSON annotation files to ensure they have proper
 shapes and labels for computer vision training.
-
-Author: Rokawoo
 """
 
 import os

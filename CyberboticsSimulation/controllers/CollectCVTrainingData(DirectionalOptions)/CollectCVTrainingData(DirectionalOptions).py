@@ -4,8 +4,6 @@
 Image and Label Collection Script for Computer Vision Training
 This script finds and copies images with matching JSON label files from multiple source directories
 to a single destination folder, avoiding duplicates and validating image formats.
-
-Author: Rokawoo
 """
 
 import os
