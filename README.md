@@ -16,15 +16,12 @@ Inspired by how [Amazon’s warehouse robots stick to the path and dodge shelves
 
 Warehouse & Fulfillment: tote/pallet transport between storage, picking, and packing
 - **Manufacturing**: line-side parts delivery (JIT)
-- **Hospital Logistics**: meds/samples/linen delivery across wards
-- **Retailt**: backroom-to-shelf restock runs
+- **Hospital Logistics**: meds/samples delivery across wards
 - **Airports**: cleaning/supply runs in mixed traffic
 - **Hotels & Hospitality**: room-service and amenity delivery
 - **Campus**: sidewalk food/mail delivery
-- **Ports**: pallet shuttling between docks and staging
-- **Construction/Mining**: material shuttle along haul roads
-- **Agriculture**: row navigation for scouting and light payloads
-- **Public Safety / Hazard Sites**: telepresence and inspection in unsafe areas
+- **Public Safety / Hazard Sites**: inspection in unsafe areas
+- etc.
 
 ## Data Flow
 
