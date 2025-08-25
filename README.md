@@ -12,7 +12,9 @@
 ## Abstract
 Inspired by how [Amazon’s warehouse robots stick to the path and dodge shelves, workers, and other bots so they can organize inventory, move items, and deliver packages.](https://youtu.be/Ox05Bks2Q3s?si=kzW86XnF4pt-teRF), we set out to build an industrial robot with the same capabilities, using computer vision to follow paths, avoid obstacles, and return to its route afterward. Yet we did not have a physical robot or a warehouse, we stimulated everything in Webots. Our perception stack uses segmentation (TensorFlow Model Zoo fine-tuned SSD ResNet50 V1 FPN 640×640) with OpenCV to understand the scene in real time. On top of that, we added Intelligent Path Deviation so the robot knows when it is worth leaving its planned route, Obstacle Classification to distinguish static objects, humans, and other robots, and a Return-to-Path Algorithm that smoothly brings it back to the optimal route. To keep it robust, we use Hybrid Sensing Integration, combining traditional sensors with computer vision signals. The approach is Simulation Validated across Webots worlds (warehouse aisles and open public spaces), showing responsive avoidance, stable path recovery, and practical behavior ready to transfer to real hardware.
 
-## Data flow
+## Data Flow
+
+```text
 [Webots Camera + Distance Sensors]
                │
         [Preprocess]
@@ -25,6 +27,7 @@ Inspired by how [Amazon’s warehouse robots stick to the path and dodge shelves
                [Fusion / Costmap]
                       │
 [Intelligent Path Deviation] → [Return-to-Path Algorithm]
+````
 
 
 ## Key Features
