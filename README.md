@@ -2,7 +2,7 @@
   <img src="ReadmeImages/S1.png" alt="Demo Image 1" align="center" width="400px"/>
   <img src="ReadmeImages/S2.png" alt="Demo Image 2" align="center" width="400px"/>
   <h1>Cartograph Automata</h1>
-  <p>By Khoi, Rokawoo, Arya, Mehroj</p>
+  <p>By Rokawoo, Arya, Khoi, Mehroj</p>
 </div>
 
 
@@ -12,17 +12,15 @@
 
 ## Abstract
 
-Cartograph Automata is a computer vision-based navigation system for mobile robots in a simulated environment - here we simulated warehouse environments. It combines object detection with simple path-planning logic to help robots avoid obstacles and move safely in real time.
+Current AMR navigation relies heavily on basic sensor systems like LIDAR and ultrasonic sensors, which simply detect obstacles and follow predetermined rules without true environmental understanding. Cartograph Automata bridges this gap by creating a hybrid system where computer vision not only detects obstacles but intelligently interprets the environment to make contextual decisions. 
 
-We used up to 700 labeled images to train an SSD ResNet50 model that detects 3 main targeted objects: people, shelves, and paths. The training process was tracked using loss graphs, showing strong performance over 14,000 steps.
+By translating visual data into movement commands, our model enables robots to safely navigate around obstacles and people in real-time, even when encountering previously unseen scenarios. This proof-of-concept demonstrates how CV-enhanced navigation significantly improves safety and efficiency in both warehouse, public settings, and applications beyond, allowing AMRs to dynamically adapt to changing conditions while maintaining operational objectives.
 
-The system uses segmentation and bounding-box mapping to create a simple obstacle map from image data. If the robot's path crosses an obstacle, it calculates a safe detour, follows it, and then returns to the original path once the way is clear.
-
-<b>Applications:</b> In warehouses, it helps mobile robots avoid workers or obstacles. In healthcare, delivery robots can use vision-based rerouting to safely navigate crowded hospital hallways. In retail, it allows shopping assistants or cleaning bots to move smoothly around people and displays in real time. The system also serves as a valuable learning tool in robotics education, offering hands-on experience with computer vision, object detection, and planning in a simulated environment. Beyond that, it provides a lightweight testbed for evaluating AI model performance in real-time navigation scenarios, making it useful for both research and practical deployment.
+The system's ability to decide when to deviate from programmed paths and when to return to them represents a meaningful step toward more autonomous and adaptable robotic systems for industrial and service applications.
 
 ## Demo
 
-[Demo Video](#)
+[Demo Video](https://github.com/user-attachments/assets/760618ae-cbd3-4b13-80f8-f5f23c96e4fc)
 
 ## Project Media
 
@@ -48,7 +46,8 @@ The system uses segmentation and bounding-box mapping to create a simple obstacl
 <div align="center">
   <img src="/ReadmeImages/ImageSegmentationOutput1.png" alt="D1" width="400px"/>
   <img src="/ReadmeImages/ImageSegmentationOutput2.png" alt="D1" width="400px"/>
-
+  <img src="/ReadmeImages/ImageSegmentationOutput3.png" alt="D1" width="400px"/>
+  <img src="/ReadmeImages/ImageSegmentationOutput4.png" alt="D1" width="400px"/>
 </div>
 
 # **Training Graphs**
