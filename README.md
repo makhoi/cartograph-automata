@@ -8,10 +8,10 @@
 
 
 > [!CAUTION]
-> :star: Our Codefest Project is really Based!
+> :star: Our Codefest Project is really BASED!
 
 ## Abstract
-
+Inspired after watching [Amazon using robot to organize packages in their warehouse](https://youtu.be/Ox05Bks2Q3s?si=kzW86XnF4pt-teRF), by how they follow the path, avoid obstacles like humans, shelves, and other robots. We came up with an idea of building same functional robot 
 Current AMR navigation relies heavily on basic sensor systems like LIDAR and ultrasonic sensors, which simply detect obstacles and follow predetermined rules without true environmental understanding. Cartograph Automata bridges this gap by creating a hybrid system where computer vision not only detects obstacles but intelligently interprets the environment to make contextual decisions. 
 
 By translating visual data into movement commands, our model enables robots to safely navigate around obstacles and people in real-time, even when encountering previously unseen scenarios. This proof-of-concept demonstrates how CV-enhanced navigation significantly improves safety and efficiency in both warehouse, public settings, and applications beyond, allowing AMRs to dynamically adapt to changing conditions while maintaining operational objectives.
@@ -74,7 +74,7 @@ Below is a consolidated graph displaying all loss metrics over training steps:
   <img src="/ReadmeImages/complete_graph.png" alt="D1" width="600px"/>
 </div>
 
-## :mag: Key Features
+## Key Features
 
 - **Intelligent Path Deviation**: Makes contextual decisions about when to leave programmed paths
 - **Obstacle Classification**: Distinguishes between static obstacles, humans, and other mobile objects
@@ -82,7 +82,7 @@ Below is a consolidated graph displaying all loss metrics over training steps:
 - **Simulation Validated**: Tested in various Webots environments including warehouses and public spaces
 - **Hybrid Sensing Integration**: Combines traditional sensors with computer vision for robust navigation
 
-## 🛠️ Libraries and Tools Used
+## Libraries and Tools Used
 
 - **TensorFlow Model Zoo**: For fine-tuning the SSD ResNet50 V1 FPN 640x640 (RetinaNet50) model
 - **Webots**: Professional robot simulator for testing and validation
