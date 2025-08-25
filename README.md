@@ -14,7 +14,7 @@ Inspired by how [Amazon’s warehouse robots stick to the path and dodge shelves
 
 ## Real-word Application
 
-Warehouse & Fulfillment: tote/pallet transport between storage, picking, and packing
+- **Warehouse & Fulfillment**: tote/pallet transport between storage, picking, and packing
 - **Manufacturing**: line-side parts delivery (JIT)
 - **Hospital Logistics**: meds/samples delivery across wards
 - **Airports**: cleaning/supply runs in mixed traffic
